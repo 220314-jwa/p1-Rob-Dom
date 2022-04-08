@@ -27,21 +27,38 @@ public class TuitionBackApp {
 			ctx.result("The get works!");
 		});
 		
+		app.get("/reimbursement", ctx ->{
+			Reimbursement reimbursement  = ctx.bodyAsClass(Reimbursement.class);
+			System.out.println(reimbursement);
+			ctx.result("It works!");
+		});
+		
+		app.post("/employed", ctx ->{
+			Employees employee = new Employees();
+			ctx.json(employee);
+		});
+		
+		app.get("/dept", ctx ->{
+			Department department = new Department();
+			System.out.println("here's a department");
+			ctx.json(department);
+		});
+		
 //		app.get("/Department", ctx ->{
 //			ServiceImp serv = new ServiceImp(new EmployeesDAOImpl());
 //			ctx.json(serv.viewDepartmentNames());
 //		});
-//		
-//		app.post("/Employees", ctx->{
-//			Employees employee = ctx.bodyAsClass(Employees.class);
-//			System.out.println(employee);
-////			EmployeesDAO employeeDAO = DAOConnect.getEmployeesDAO();
-//		});
-//		
-//		app.post("/Managers", ctx ->{
-//			Managers manager = ctx.bodyAsClass(Managers.class);
-//			System.out.println(manager);
-//		});
+		
+		app.post("/Employees", ctx->{
+			Employees employee = ctx.bodyAsClass(Employees.class);
+			System.out.println(employee);
+			EmployeesDAO employeeDAO = DAOConnect.getEmployeesDAO();
+		});
+		
+		app.post("/Managers", ctx ->{
+			Managers manager = ctx.bodyAsClass(Managers.class);
+			System.out.println(manager);
+		});
 		}
 
 }

@@ -2,6 +2,8 @@ package com.revature.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.revature.data.DAOConnect;
@@ -28,23 +30,15 @@ public class EmployeesDAOImpl implements EmployeesDAO {
 	            preparedStatement.setString(1, newObj.getFirstName());
 	            preparedStatement.setString(2, newObj.getLastName());
 	            preparedStatement.setLong(3, newObj.getManagerId());
-
-	            // shortcut for now, but we need the corresponding id for the status
-	            int dept_id;
-	            if (newObj.getDept().equals("available")) {
-	                dept_id = 1;
-	            }
-	            else {
-	                status_id = 2;
-	            }
-	            preparedStatement.setInt(5, status_id);
-	            // execute this command, return number of rows affected:
+	            preparedStatement.setLong(4, newObj.getDeptId());
+	            
+	            // execute this command, return the number of impacted rows:
 	            int count = preparedStatement.executeUpdate();
-	            // lets us return the id that is auto-generated
+	            // return the id that's auto-generated
 	            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-	            // if we affected one or more rows:
+	            // if one or more rows are affected:
 	            if (count > 0) {
-	                System.out.println("Pet added!");
+	                System.out.println("Employee added!");
 	                // return the generated id:
 	                // before we call resultSet.next(), it's basically pointing to nothing useful
 	                // but moving that pointer allows us to get the information that we want
@@ -69,7 +63,25 @@ public class EmployeesDAOImpl implements EmployeesDAO {
 	@Override
 	public Employees getById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "Select * from Employee e where e.empl_id= ?;";
+		Employees empl = null;
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+			preparedStatement.setLong(1,id);
+			// execute the command, and save the count of rows affected:
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				empl = EmployeesDAOImpl.parseResultSet(resultSet);
+				// now, we've created a pet Java object based on the info from our table:
+			} else {
+				System.out.println("User with id - " + id +" - does not exist!");
+				// return null in this case:
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return empl;
 	}
 
 	@Override
@@ -90,10 +102,53 @@ public class EmployeesDAOImpl implements EmployeesDAO {
 		
 	}
 
+	private static Employees parseResultSet(ResultSet resultSet) {
+		// TODO Auto-generated method stub
+		Employees employee = new Employees();
+
+		try {
+			employee.setDeptId(resultSet.getInt(1));
+			employee.setFirstName(resultSet.getString(2));
+			employee.setLastName(resultSet.getString(3));
+			employee.setPassword(resultSet.getString(4));
+			employee.setManagerId(resultSet.getInt(5));
+			employee.setDeptId(resultSet.getInt(6));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return employee;
+	}
+	
 	@Override
 	public void deleteById(int id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Employees getByUsername(String username) {
+		// TODO Auto-generated method stub
+		String sql = "Select * from Employee e where e.username= ?;";
+		Employees empl = null;
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+			preparedStatement.setString(1,username);
+			// execute the command, and save the count of rows affected:
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				empl = EmployeesDAOImpl.parseResultSet(resultSet);
+				// now, we've created a pet Java object based on the info from our table:
+			} else {
+				//System.out.println("Something went wrong when querying the employee!");
+				// return null in this case:
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return empl;
 	}
 
 }

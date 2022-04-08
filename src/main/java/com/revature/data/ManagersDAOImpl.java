@@ -10,13 +10,16 @@ import com.revature.trms.Event;
 import com.revature.trms.Managers;
 
 public class ManagersDAOImpl implements ManagersDAO {
-	private static ConnectionFactory conFactory = ConnectionFactory.getConnected();
+	Connection connection;
+
+	public ManagersDAOImpl() throws ClassNotFoundException {
+		connection = ConnectionFactory.getConnected();
+	}
 
 	@Override
 	// this method needs to insert the object into the database:
 	// so, we need to connect to the database:
 	public int create(Event newObj) {
-		Connection connection = conFactory.getConnected();
 		
 	    // this stores our sql command, that we would normally to DBeaver/command line
 	    //                             0   1     2        3            4    5

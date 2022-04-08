@@ -15,7 +15,7 @@ public class Employees {
 		employeeId = 0;
 		firstName="";
 		lastName="";
-		setSubmitRequest("");
+		submitRequest="";
 		managerId=0;
 		deptId=0;
 		finalGrade=0;

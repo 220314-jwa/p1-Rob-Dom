@@ -27,13 +27,12 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			 PreparedStatement preparedStatement = connect.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 	            // set the fields:
 	            preparedStatement.setLong(1, newObj.getRequestId());
-	            preparedStatement.setLong(2, newObj.getSubmitterId());
 	            preparedStatement.setLong(3, newObj.getEventId());
 	            preparedStatement.setLong(4, newObj.getStatusId());
-	            preparedStatement.setTimestamp(5, new Timestamp(newObj.getEventDate()));
+	            preparedStatement.setTimestamp(5, new Timestamp(newObj.eventDate(), null));
 	            preparedStatement.setString(6, newObj.getDescription());
-	            preparedStatement.setString(7, newObj.getLocation());
-	            preparedStatement.setTimestamp(8, new Timestamp(newObj.getSubmittedAt()));
+	            preparedStatement.setString(7, newObj.getDescription());
+	            preparedStatement.setTimestamp(8, new Timestamp(newObj.submittedAt(), null));
 	            
 	            int count = preparedStatement.executeUpdate();
 	            ResultSet resultSet = preparedStatement.getGeneratedKeys();
