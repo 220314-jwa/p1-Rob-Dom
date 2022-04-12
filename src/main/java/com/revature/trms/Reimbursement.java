@@ -43,7 +43,7 @@ public class Reimbursement {
 		this.statusId = statusId;
 	}
 	
-	public Date eventDate() {
+	public Date getEventDate() {
 		return eventDate;
 	}
 
@@ -59,7 +59,7 @@ public class Reimbursement {
 		this.description = description;
 	}
 	
-	public Date submittedAt() {
+	public Date getSubmittedAt() {
 		return submittedAt;
 	}
 

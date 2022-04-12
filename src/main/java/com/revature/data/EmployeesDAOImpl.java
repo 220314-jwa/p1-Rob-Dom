@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.revature.data.DAOConnect;
 import com.revature.service.ConnectionFactory;
 import com.revature.trms.Employees;
+import com.revature.trms.Event;
 
 public class EmployeesDAOImpl implements EmployeesDAO {
 	 Connection connection;
@@ -149,6 +149,12 @@ public class EmployeesDAOImpl implements EmployeesDAO {
 			e.printStackTrace();
 		}
 		return empl;
+	}
+
+	@Override
+	public int create(Event newObj) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -78,4 +78,10 @@ public class StatusDAOImpl implements StatusDAO {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int create(Event newObj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

@@ -4,11 +4,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.*;
 
 import com.revature.exceptions.*;
 import com.revature.trms.*;
 
+@ExtendWith(MockitoExtension.class)
 public class ServiceTest {
 	private ServiceImp empServTest;
 	private Status statusNameTest;
@@ -35,7 +38,7 @@ public class ServiceTest {
 	public void ReimbursementCheck() throws RequestAlreadyExistsException{
 		String reimbursementCheck = "Request Sent!";
 		
-		Reimbursement result = Reimbusement.RequestId();
+		Reimbursement result = Reimbursement.getRequestId();
 		assertEquals(reimbursementCheck, result.getRequestId());
 		
 	}

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ServiceImp implements Service{
-	private EmployeesDAOImpl empDao;
+	EmployeesDAOImpl empDao = DAOConnect.getEmployeesDAO();
 	
 	public ServiceImp(EmployeesDAOImpl empDao) {
 		this.empDao = empDao;
@@ -16,7 +16,17 @@ public class ServiceImp implements Service{
 	
 	@Override
 	public Employees logIn(String username, String password) throws IncorrectCredentialsException, SQLException {
-		return null;
+		Employees user = empDao.getByUsername(username);
+		if(user!=null) {
+			if(password.equals(user.getPassword())) {
+				System.out.println("You logged in!");
+			}else {
+				System.out.println("Your password is wrong!");
+			}
+		}else {
+			System.out.println("User does not exist!");
+		}
+		return  user;
 	}
 	@Override
 	public Employees statusRequest(Employees employee) throws StatusDoesNotExistException {

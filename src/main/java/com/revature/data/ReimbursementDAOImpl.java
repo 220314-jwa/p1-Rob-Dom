@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.revature.service.ConnectionFactory;
 import com.revature.trms.Employees;
+import com.revature.trms.Event;
 import com.revature.trms.Reimbursement;
 
 public class ReimbursementDAOImpl implements ReimbursementDAO {
@@ -29,10 +30,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	            preparedStatement.setLong(1, newObj.getRequestId());
 	            preparedStatement.setLong(3, newObj.getEventId());
 	            preparedStatement.setLong(4, newObj.getStatusId());
-	            preparedStatement.setTimestamp(5, new Timestamp(newObj.eventDate(), null));
+	            preparedStatement.setTimestamp(5, new Timestamp(newObj.getEventDate().getTime()));
 	            preparedStatement.setString(6, newObj.getDescription());
 	            preparedStatement.setString(7, newObj.getDescription());
-	            preparedStatement.setTimestamp(8, new Timestamp(newObj.submittedAt(), null));
+	            preparedStatement.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
 	            
 	            int count = preparedStatement.executeUpdate();
 	            ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -90,5 +91,23 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	public void deleteById(int id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Reimbursement> getAllByEmployee(Employees employee) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reimbursement> getReimbursementsByStatus(String status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int create(Event newObj) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

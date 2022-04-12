@@ -24,7 +24,7 @@ public class DAOConnect {
     		EmployeesDAO = new EmployeesDAOImpl();
     	return EmployeesDAO;
     }
-    public static EventDAO getEventDAO() {
+    public static EventDAO getEventDAO() throws ClassNotFoundException {
         // make sure we're not recreating the dao if it already exists:
         if (EventDAO == null) {
         	EventDAO = new EventDAOImpl();
@@ -32,7 +32,7 @@ public class DAOConnect {
         return EventDAO;
     }
     
-    public static ManagersDAO getManagersDAO() {
+    public static ManagersDAO getManagersDAO() throws ClassNotFoundException {
     	if (ManagersDAO == null)
     		ManagersDAO = new ManagersDAOImpl();
     	return ManagersDAO;
@@ -45,7 +45,7 @@ public class DAOConnect {
         return ReimbursementDAO;
     }
     
-    public static StatusDAO getStatusDAO() {
+    public static StatusDAO getStatusDAO() throws ClassNotFoundException {
     	if (StatusDAO == null)
     		StatusDAO = new StatusDAOImpl();
     	return StatusDAO;
