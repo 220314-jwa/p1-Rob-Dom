@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.revature.service.ConnectionFactory;
 import com.revature.trms.Department; //depHeadID
+import com.revature.trms.Event;
 
 public class DepartmentDAOImpl implements DepartmentDAO {
 	Connection connection;
@@ -165,6 +166,12 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 	public List<Department> getDepHeadID(String depHeadID) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int create(Event newObj) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
 

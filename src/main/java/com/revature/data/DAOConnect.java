@@ -1,53 +1,58 @@
 package com.revature.data;
 //this is essentially the DAO Factory
 public class DAOConnect {
-	private static DepartmentDAO DepartmentDAO = null;
-    private static EmployeesDAO EmployeesDAO = null;
-    private static EventDAO EventDAO = null;
-    private static ManagersDAO ManagersDAO = null;
-    private static ReimbursementDAO ReimbursementDAO = null;
-    private static StatusDAO StatusDAO = null;
+	private static DepartmentDAO departmentDAO = null;
+    private static EmployeesDAO employeesDAO = null;
+    private static EventDAO eventDAO = null;
+    private static ManagersDAO managersDAO = null;
+    private static ReimbursementDAO reimbursementDAO = null;
+    private static StatusDAO statusDAO = null;
     
  // make our constructor private, so it can't be accessed publicly
-    private DAOConnect() { }
+    private DAOConnect() { 
+    	
+    }
 
-    public static DepartmentDAO getDepartmentDAO() throws ClassNotFoundException {
+    public static DepartmentDAO getDepartmentDAO() {
         // make sure we're not recreating the dao if it already exists:
-        if (DepartmentDAO == null) {
-        	DepartmentDAO = new DepartmentDAOImpl();
+        if (departmentDAO == null) {
+        	departmentDAO = new DepartmentDAOImpl();
         }
-        return DepartmentDAO;
+        return departmentDAO;
     }
     
-    public static EmployeesDAO getEmployeesDAO() throws ClassNotFoundException {
-    	if (EmployeesDAO == null)
-    		EmployeesDAO = new EmployeesDAOImpl();
-    	return EmployeesDAO;
+    public static EmployeesDAO getEmployeesDAO() {
+    	if (employeesDAO == null) {
+    		employeesDAO = new EmployeesDAOImpl();
+    	}
+    	return employeesDAO;
     }
-    public static EventDAO getEventDAO() throws ClassNotFoundException {
+    public static EventDAO getEventDAO() {
         // make sure we're not recreating the dao if it already exists:
-        if (EventDAO == null) {
-        	EventDAO = new EventDAOImpl();
+        if (eventDAO == null) {
+        	eventDAO = new EventDAOImpl();
         }
-        return EventDAO;
+        return eventDAO;
     }
     
-    public static ManagersDAO getManagersDAO() throws ClassNotFoundException {
-    	if (ManagersDAO == null)
-    		ManagersDAO = new ManagersDAOImpl();
-    	return ManagersDAO;
+    public static ManagersDAO getManagersDAO() {
+    	if (managersDAO == null) {
+    		managersDAO = new ManagersDAOImpl();
+    	}
+    	return managersDAO;
     }
-    public static ReimbursementDAO getReimbursementDAO() throws ClassNotFoundException {
+    public static ReimbursementDAO getReimbursementDAO() {
         // make sure we're not recreating the dao if it already exists:
-        if (ReimbursementDAO == null) {
-        	ReimbursementDAO = new ReimbursementDAOImpl();
+        if (reimbursementDAO == null) {
+        	reimbursementDAO = new ReimbursementDAOImpl();
         }
-        return ReimbursementDAO;
+        return reimbursementDAO;
     }
     
-    public static StatusDAO getStatusDAO() throws ClassNotFoundException {
-    	if (StatusDAO == null)
-    		StatusDAO = new StatusDAOImpl();
-    	return StatusDAO;
+    public static StatusDAO getStatusDAO() {
+    	if (statusDAO == null) {
+    		statusDAO = new StatusDAOImpl();
+    	}
+    	return statusDAO;
     }
 }

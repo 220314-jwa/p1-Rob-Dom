@@ -1,11 +1,9 @@
 package com.revature.data;
 
 import java.security.Timestamp;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
+import java.util.Date;
 
 import com.revature.service.ConnectionFactory;
 import com.revature.trms.Employees;
@@ -30,10 +28,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	            preparedStatement.setLong(1, newObj.getRequestId());
 	            preparedStatement.setLong(3, newObj.getEventId());
 	            preparedStatement.setLong(4, newObj.getStatusId());
-	            preparedStatement.setTimestamp(5, new Timestamp(newObj.getEventDate().getTime()));
+	            preparedStatement.setDate(5, new java.sql.Date(newObj.getEventDate().getTime()));
 	            preparedStatement.setString(6, newObj.getDescription());
 	            preparedStatement.setString(7, newObj.getDescription());
-	            preparedStatement.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
+	            preparedStatement.setDate(8, new java.sql.Date(newObj.getSubmittedAt().getTime()));
 	            
 	            int count = preparedStatement.executeUpdate();
 	            ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -61,6 +59,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	            	}
 	            	}
 	            }
+		return -1;
 	            	}
 
 	@Override

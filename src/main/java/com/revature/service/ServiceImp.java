@@ -2,15 +2,16 @@ package com.revature.service;
 
 import com.revature.data.*;
 import com.revature.exceptions.IncorrectCredentialsException;
+import com.revature.exceptions.RequestAlreadyExistsException;
 import com.revature.exceptions.StatusDoesNotExistException;
 import com.revature.trms.*;
 import java.sql.SQLException;
 import java.util.List;
 
 public class ServiceImp implements Service{
-	EmployeesDAOImpl empDao = DAOConnect.getEmployeesDAO();
+	EmployeesDAO empDao = DAOConnect.getEmployeesDAO();
 	
-	public ServiceImp(EmployeesDAOImpl empDao) {
+	public ServiceImp(EmployeesDAO empDao) {
 		this.empDao = empDao;
 	}
 	
@@ -37,5 +38,11 @@ public class ServiceImp implements Service{
 	public List<Department> viewDepartmentNames() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int submitRequest(Reimbursement newRequest) throws RequestAlreadyExistsException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

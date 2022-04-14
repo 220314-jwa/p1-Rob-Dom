@@ -38,7 +38,16 @@ public class TuitionBackApp {
 			ctx.json(employee);
 		});
 		
-		app.get("/dept", ctx ->{
+		app.post("/dept", ctx ->{
+			Department department = ctx.bodyAsClass(com.revature.trms.Department.class);
+			System.out.println(department);
+			DepartmentDAO departmentDAO = DAOConnect.getDepartmentDAO();
+			departmentDAO.create(department);
+			System.out.println(department);
+		});
+
+		
+		app.get("/Department", ctx ->{
 			Department department = new Department();
 			System.out.println("here's a department");
 			ctx.json(department);

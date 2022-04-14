@@ -15,7 +15,40 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import com.revature.trms.Employees;
 
+@TestMethodOrder(OrderAnnotation.class)
 public class EmployeesDAOTest {
+	class EmployeeDAOImplTest {
+		private static EmployeesDAO employeeDAO = DAOConnect.getEmployeesDAO();
+		private static Employees testEmployee = new Employees();
+		private static Employees testNewEmployee = new Employees();
+
+		@BeforeAll
+		public static void setUp() {
+			testEmployee.setFirstName("test");
+			Random rand = new Random();
+			testNewEmployee.setFirstName("test_" + rand.nextLong());
+			testEmployee.setEmployeeId(employeeDAO.create(testEmployee));
+		}
+		@AfterAll
+		public static void cleanUp() {
+			employeeDAO.delete(testEmployee);
+		}
+		
+		@Test
+		public void getByIdExists() {
+			
+			int employee_id = testEmployee.getEmployeeId();
+			Employees employee = employeeDAO.getById(employee_id);
+			
+			assertEquals(testEmployee, employee);
+		}
+		
+		@Test
+		public void getByIdDoesNotExist() {
+			Employees employee = employeeDAO.getById(0);
+			assertNull(employee);
+		}
+	
 	@Test
 	public void getByRequestAlreadyExists() {
 		//Employees employee = EmployeesDAO.getByUsername("HawkJohnson");
